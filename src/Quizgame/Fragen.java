@@ -1,5 +1,7 @@
 package Quizgame;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -64,8 +66,20 @@ public class Fragen {
         }
 
     }
-    public String inputUser(){
-        userantwort = Prog1Tools.IOTools.readString("Wie lautet ihre Antwort?");
+    public String inputUser() {
+        try {
+            userantwort = Prog1Tools.IOTools.readString("Wie lautet ihre Antwort?");
+            List<Character> chars = new ArrayList<>();
+            for (char ch : userantwort.toCharArray()) {
+                chars.add(ch);
+                if (Character.isDigit(ch)) {
+                    throw new NumberFormatException();
+                }
+            }
+
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Zahlen sind ungültig");
+        }
         return " Ihre Antwort lautet " + userantwort;
     }
 
